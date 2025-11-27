@@ -46,5 +46,6 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
+```
 
 All in all, this site is a super simple way for me to make blog posts. It is free and it took very little effort. It might not be the best way to make a blog website, but I'm content with it.
