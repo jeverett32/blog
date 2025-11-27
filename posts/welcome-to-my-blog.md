@@ -2,7 +2,7 @@
 title: Welcome to My Blog
 date: 2025-11-27T16:30:00.000-07:00
 thumbnail: /assets/uploads/laptop.jpeg
-readTime: 5 min read
+readTime: 3 min read
 tags:
   - Blog
 description: A little introduction to myself and why I chose to write this blog.
