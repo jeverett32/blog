@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "welcome-post",
+    "title": "Building a Blog with Static HTML",
+    "date": "2025-11-27",
+    "thumbnail": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+    "tags": ["Web Dev", "Netlify"],
+    "description": "How I built this blog using simple HTML, Tailwind CSS, and Decap CMS for easy management.",
+    "readTime": "3 min read"
+  }
+]

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | John Everett</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Darker blue for legibility on white */
+            --accent-color: #58a6ff;  /* Your portfolio blue */
+            --text-main: #111827;
+            --text-muted: #6b7280;
+        }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #ffffff; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <header class="border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="https://johnreverett.com" class="text-sm font-bold text-gray-400 hover:text-[var(--primary-color)] transition">
+                    &larr; PORTFOLIO
+                </a>
+                <div class="h-6 w-px bg-gray-200"></div>
+                <a href="/" class="text-2xl font-extrabold font-poppins tracking-tight">
+                    John Everett <span class="text-[var(--primary-color)]">Blog</span>
+                </a>
+            </div>
+            
+            <div class="relative w-full max-w-xs hidden md:block">
+                <input type="text" id="search-input" placeholder="Search articles..." 
+                    class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition">
+                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <div class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold font-poppins mb-4 text-gray-900">
+                Insights & <span class="text-[var(--primary-color)]">Tutorials</span>
+            </h1>
+            <p class="text-lg text-gray-500 max-w-2xl">
+                Thoughts on Full Stack Development, Data Analytics, and Systems Engineering.
+            </p>
+        </div>
+
+        <div class="md:hidden mb-8">
+            <input type="text" id="mobile-search-input" placeholder="Search articles..." class="w-full pl-4 pr-4 py-3 border border-gray-200 rounded-lg text-sm bg-gray-50">
+        </div>
+
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full py-20 text-center text-gray-400 animate-pulse">Loading posts...</div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 py-8 bg-gray-50 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 John Everett. <a href="/admin/" class="ml-2 hover:text-[var(--primary-color)] transition">Admin Login</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Use a relative path so it works on both localhost and prod
+        const DATA_URL = 'posts.json';
+
+        async function init() {
+            try {
+                const response = await fetch(DATA_URL);
+                if (!response.ok) throw new Error("Could not fetch posts");
+                const allPosts = await response.json();
+                
+                // Sort by date (newest first)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                renderPosts(allPosts);
+
+                // Search Logic
+                const handleSearch = (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const filtered = allPosts.filter(post => 
+                        post.title.toLowerCase().includes(term) || 
+                        post.tags.some(tag => tag.toLowerCase().includes(term))
+                    );
+                    renderPosts(filtered);
+                };
+
+                document.getElementById('search-input').addEventListener('input', handleSearch);
+                document.getElementById('mobile-search-input').addEventListener('input', handleSearch);
+
+            } catch (err) {
+                document.getElementById('posts-grid').innerHTML = 
+                    `<div class="col-span-full text-center text-red-400">Unable to load posts. Ensure posts.json exists.</div>`;
+            }
+        }
+
+        function renderPosts(posts) {
+            const grid = document.getElementById('posts-grid');
+            if (posts.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center text-gray-400 py-12">No articles found.</div>`;
+                return;
+            }
+
+            grid.innerHTML = posts.map(post => `
+                <a href="post.html?id=${post.slug}" class="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col h-full">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-3 left-3 flex gap-2">
+                             ${post.tags.map(t => `<span class="bg-white/90 backdrop-blur text-[var(--primary-color)] text-xs font-bold px-2 py-1 rounded-md shadow-sm uppercase tracking-wide">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center text-xs text-gray-400 mb-3 font-medium">
+                            <span>${new Date(post.date).toLocaleDateString()}</span>
+                            <span class="mx-2">•</span>
+                            <span>${post.readTime || '5 min read'}</span>
+                        </div>
+                        <h2 class="text-xl font-bold font-poppins text-gray-900 mb-3 group-hover:text-[var(--primary-color)] transition-colors leading-tight">
+                            ${post.title}
+                        </h2>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow leading-relaxed">
+                            ${post.description}
+                        </p>
+                        <div class="flex items-center text-[var(--primary-color)] font-bold text-sm mt-auto">
+                            Read Article <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        init();
+    </script>
+</body>
+</html>
