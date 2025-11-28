@@ -24,6 +24,6 @@
     "thumbnail": "/assets/uploads/netlify.jpg",
     "tags": ["Web Development", "Netlify", "Tutorial"],
     "description": "A look under the hood at how I built this blog using plain HTML, Tailwind CSS, and Netlify's free tier without a traditional backend.",
-    "readTime": "4 min read"
+    "readTime": "2 min read"
 }
 ]

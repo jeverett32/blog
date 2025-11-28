@@ -7,8 +7,6 @@ tags:
   - CLI
 description: My experience using AI agents with the command line interface.
 ---
-# Why You Need to Move Your AI Workflow to the CLI
-
 If you program, you know about AI coding agents. You've used ChatGPT, Gemini, and Claude in your browser to string up code that you copy and paste into VS Code. You have probably used GitHub Copilot to autocomplete your lines or the Copilot extension to scaffold entire files. Maybe you've even dabbled with AI-integrated IDEs like Cursor or Windsurf. Whatever your experience, you know that coding is currently one of AI's greatest capabilities.
 
 Like many of you, I started out using AI in the browser. It works well, but the workflow is clunky—copying, pasting, creating files manually, and testing everything yourself. Naturally, I moved to IDE extensions like Copilot. These are legit; they see your codebase, create files, and run terminal commands.
