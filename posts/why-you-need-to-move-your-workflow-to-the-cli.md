@@ -31,7 +31,7 @@ When you hit a high percentage, you can run a command (like `/compact`) that sum
 
 ## The Tools: Gemini, Claude, and Copilot
 
-Most big AI players have a CLI now. OpenAI has their API integrations, Anthropic has **Claude Code**, and GitHub has **Copilot CLI**.
+Most big AI players have a CLI now. OpenAI has **Codex**, Anthropic has **Claude Code**, and GitHub has **Copilot CLI**.
 
 * **Claude Code:** This is probably the king of coding logic right now. **Claude 4.5 Sonnet** is an absolute monster. The only downside is the $20/mo subscription and the usage limits.
 * **Gemini CLI:** Since I have the free Gemini Advanced subscription for students, I have practically unlimited usage with **Gemini 3 Pro**. It’s super legit and serves as the workhorse of my setup.
