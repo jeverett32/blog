@@ -1,4 +1,13 @@
 [
+    {
+    "slug": "why-you-need-to-move-your-workflow-to-the-cli",
+    "title": "Why You Need to Move Your Workflow to the CLI",
+    "date": "2025-11-28",
+    "thumbnail": "/assets/uploads/geminicli.png",
+    "tags": ["Personal", "AI", "CLI"],
+    "description": "My experience using AI agents with the command line interface.",
+    "readTime": "3 min read"
+  },
   {
     "slug": "welcome-to-my-blog",
     "title": "Welcome to My Blog",
