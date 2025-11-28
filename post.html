@@ -74,7 +74,7 @@
 
                 if (meta) {
                     document.getElementById('post-title').textContent = meta.title;
-                    document.getElementById('post-date').textContent = new Date(meta.date).toLocaleDateString();
+                    document.getElementById('post-date').textContent = new Date(meta.date).toLocaleDateString('en-US', { timeZone: 'UTC' });
                     document.getElementById('post-image').src = meta.thumbnail;
                     document.getElementById('post-image').classList.remove('hidden');
                     document.getElementById('post-tags').innerHTML = meta.tags.map(t => 

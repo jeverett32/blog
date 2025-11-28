@@ -115,7 +115,7 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <div class="flex items-center text-xs text-gray-400 mb-3 font-medium">
-                            <span>${new Date(post.date).toLocaleDateString()}</span>
+                            <span>${new Date(post.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
                             <span class="mx-2">•</span>
                             <span>${post.readTime || '5 min read'}</span>
                         </div>
