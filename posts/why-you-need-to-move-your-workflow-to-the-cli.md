@@ -1,6 +1,6 @@
 ---
 title: Why You Need to Move Your Workflow to the CLI
-date: 2025-11-28T14:00:00.000-07:00
+date: 2025-11-28T14:04:00.000-07:00
 thumbnail: /assets/uploads/geminicli.png
 readTime: 3 min read
 tags:
