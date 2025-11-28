@@ -20,15 +20,29 @@
         h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="bg-white text-gray-800 antialiased">
+<body class="bg-white text-gray-800 antialiased flex flex-col min-h-screen">
 
-    <nav class="max-w-3xl mx-auto px-4 py-6 flex justify-between items-center">
-        <a href="/" class="text-sm font-bold text-gray-500 hover:text-blue-600 transition flex items-center gap-2">
-            &larr; Back to Blog
-        </a>
-    </nav>
+    <header class="border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-sm font-bold text-gray-400 hover:text-[var(--primary-color)] transition">
+                    &larr; Home
+                </a>
+                <div class="h-6 w-px bg-gray-200"></div>
+                <a href="/" class="text-2xl font-extrabold font-poppins tracking-tight">
+                    John Everett <span class="text-[var(--primary-color)]">Blog</span>
+                </a>
+            </div>
+            
+            <div class="relative w-full max-w-xs hidden md:block">
+                <input type="text" id="search-input" placeholder="Search articles..." 
+                    class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition">
+                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </div>
+    </header>
 
-    <article class="max-w-3xl mx-auto px-4 pb-20">
+    <article class="max-w-3xl mx-auto px-4 pb-20 pt-12">
         <div id="loading" class="text-center py-20 text-gray-400">Loading Article...</div>
         
         <div id="content" class="hidden">
@@ -45,6 +59,19 @@
         </div>
     </article>
 
+    <section class="max-w-5xl mx-auto px-4 pb-20">
+        <h2 class="text-3xl font-extrabold mb-6 text-center">Related Articles</h2>
+        <div id="related-articles" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Related articles will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-100 py-8 bg-gray-50 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 John Everett. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('id');
@@ -59,36 +86,88 @@
                 const text = await res.text();
 
                 // Use a simple regex to separate Frontmatter (YAML) from Body
-                // (Note: In a robust app, use a real front-matter parser library)
                 const parts = text.split('---');
-                const body = parts.slice(2).join('---'); // The content after the second '---'
+                const body = parts.slice(2).join('---');
 
-                // Render
+                // Render Markdown
                 document.getElementById('markdown-body').innerHTML = marked.parse(body);
                 
-                // Try to find matching metadata from posts.json for the header
-                // (Since simple markdown fetch doesn't easily give us the YAML variables without a library)
-                const jsonRes = await fetch('posts.json');
-                const posts = await jsonRes.json();
-                const meta = posts.find(p => p.slug === slug);
+                // Fetch all post metadata
+                const jsonRes = await fetch('/posts.json');
+                const allPosts = await jsonRes.json();
+                
+                const currentPost = allPosts.find(p => p.slug === slug);
 
-                if (meta) {
-                    document.getElementById('post-title').textContent = meta.title;
-                    document.getElementById('post-date').textContent = new Date(meta.date).toLocaleDateString('en-US', { timeZone: 'UTC' });
-                    document.getElementById('post-image').src = meta.thumbnail;
-                    document.getElementById('post-image').classList.remove('hidden');
-                    document.getElementById('post-tags').innerHTML = meta.tags.map(t => 
+                if (currentPost) {
+                    document.getElementById('post-title').textContent = currentPost.title;
+                    document.getElementById('post-date').textContent = new Date(currentPost.date).toLocaleDateString('en-US', { timeZone: 'UTC' });
+                    
+                    if (currentPost.thumbnail) {
+                        const postImage = document.getElementById('post-image');
+                        postImage.src = currentPost.thumbnail;
+                        postImage.alt = currentPost.title;
+                        postImage.classList.remove('hidden');
+                    }
+
+                    document.getElementById('post-tags').innerHTML = currentPost.tags.map(t => 
                         `<span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-bold uppercase">${t}</span>`
                     ).join('');
+                    
+                    // --- Related Articles Logic ---
+                    
+                    // 1. Sort all posts by date (newest first)
+                    const sortedPosts = allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                    // 2. Find related articles by tag
+                    let relatedArticles = sortedPosts.filter(p => {
+                        return p.slug !== currentPost.slug && p.tags.some(tag => currentPost.tags.includes(tag));
+                    });
+
+                    // 3. If not enough related articles, fill with most recent
+                    if (relatedArticles.length < 3) {
+                        const recentPosts = sortedPosts.filter(p => {
+                            // Exclude current post and already included related articles
+                            return p.slug !== currentPost.slug && !relatedArticles.find(rp => rp.slug === p.slug);
+                        });
+                        
+                        const needed = 3 - relatedArticles.length;
+                        relatedArticles.push(...recentPosts.slice(0, needed));
+                    }
+
+                    // 4. Take the first 3
+                    relatedArticles = relatedArticles.slice(0, 3);
+                    
+                    // 5. Render related articles
+                    const relatedContainer = document.getElementById('related-articles');
+                    if (relatedArticles.length > 0) {
+                        relatedContainer.innerHTML = relatedArticles.map(post => `
+                            <a href="/post.html?id=${post.slug}" class="block group">
+                                <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-32 object-cover rounded-lg mb-2 group-hover:opacity-75 transition-opacity">
+                                <h3 class="font-bold text-lg mb-1 group-hover:text-blue-600 transition-colors">${post.title}</h3>
+                                <div class="text-gray-500 text-sm">
+                                    <span>${new Date(post.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
+                                    <span class="mx-1">•</span>
+                                    <span>${post.readTime || '5 min read'}</span>
+                                </div>
+                            </a>
+                        `).join('');
+                    } else {
+                        relatedContainer.innerHTML = '<p class="text-gray-500">No other articles to display.</p>';
+                         document.querySelector('h2').style.display = 'none';
+                    }
+
+                } else {
+                     throw new Error("Post metadata not found");
                 }
+
 
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('content').classList.remove('hidden');
                 
-                Prism.highlightAll(); // Colorize code blocks
+                Prism.highlightAll();
 
             } catch (err) {
-                document.getElementById('loading').textContent = "Article not found.";
+                document.getElementById('loading').textContent = err.message || "Article not found.";
             }
         }
         loadPost();
