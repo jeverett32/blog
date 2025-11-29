@@ -1,5 +1,14 @@
 [
     {
+    "slug": "how-to-install-use-the-gemini-cli-plus-claude-copilot-codex",
+    "title": "How to Install & Use the Gemini CLI (Plus Claude, Copilot, & Codex)",
+    "date": "2025-11-28",
+    "thumbnail": "/assets/uploads/geminicli.webp",
+    "tags": ["Tutorial", "AI", "CLI"],
+    "description": "This step-by-step guide walks you through installing the Gemini CLI to develop code directly from your terminal, with a quick setup comparison for Claude Code, GitHub Copilot, and OpenAI Codex.",
+    "readTime": "5 min read"
+  },
+    {
     "slug": "why-you-need-to-move-your-workflow-to-the-cli",
     "title": "Why You Need to Move Your Workflow to the CLI",
     "date": "2025-11-28",
