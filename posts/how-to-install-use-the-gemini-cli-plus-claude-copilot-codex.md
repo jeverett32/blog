@@ -112,7 +112,7 @@ npm install -g @github/copilot
 ```
 
 **Usage:**
-Run `copilot`. You can also use it for quick one-off explanations.
+Run ```copilot```. You can also use it for quick one-off explanations.
 
 ```bash
 # Start an interactive session
