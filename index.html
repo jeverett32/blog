@@ -1,136 +1,360 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | John Everett</title>
+    <title>The John Everett</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Chomsky&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.cdnfonts.com/css/chomsky');
+
         :root {
-            --primary-color: #2563eb; /* Darker blue for legibility on white */
-            --accent-color: #58a6ff;  /* Your portfolio blue */
-            --text-main: #111827;
-            --text-muted: #6b7280;
+            --color-gold: #D4AF37;
+            --color-black: #121212;
+            --color-gray-dark: #333333;
+            --color-gray-medium: #666666;
+            --color-gray-light: #e5e7eb;
         }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #ffffff; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: #FAFAFA;
+            color: var(--color-black);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-masthead {
+            font-family: 'Chomsky', 'Playfair Display', serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
     </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col bg-[#FAFAFA]">
 
-    <header class="border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header class="flex flex-col w-full border-b-4 border-black mb-8 bg-white">
+        <!-- Top Bar -->
+        <div class="hidden md:flex justify-between items-center py-1 px-4 sm:px-8 border-b border-gray-200 text-[11px] font-[Plus Jakarta Sans] uppercase tracking-widest text-gray-500">
             <div class="flex items-center gap-4">
-                <a href="https://johnreverett.com" class="text-sm font-bold text-gray-400 hover:text-[var(--primary-color)] transition">
-                    &larr; PORTFOLIO
-                </a>
-                <div class="h-6 w-px bg-gray-200"></div>
-                <a href="/" class="text-2xl font-extrabold font-poppins tracking-tight">
-                    John Everett <span class="text-[var(--primary-color)]">Blog</span>
-                </a>
+                <span class="font-bold text-gray-900" id="current-date"></span>
+                <span>Today's Paper</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://johnreverett.com" class="hover:text-[#D4AF37] transition-colors">Portfolio</a>
+                <a href="https://github.com/jeverett32" class="hover:text-[#D4AF37] transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/johneverett32" class="hover:text-[#D4AF37] transition-colors">LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Masthead -->
+        <div class="py-6 sm:py-10 flex flex-col items-center justify-center relative">
+            <div class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 md:hidden">
+                <button class="p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
             </div>
             
-            <div class="relative w-full max-w-xs hidden md:block">
-                <input type="text" id="search-input" placeholder="Search articles..." 
-                    class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition">
-                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <a href="/" class="text-4xl sm:text-6xl md:text-8xl font-masthead font-black tracking-tight text-black text-center px-4 leading-none">
+                The John Everett
+            </a>
+            <div class="mt-2 flex items-center gap-3">
+                <div class="h-px w-8 sm:w-16 bg-gray-300"></div>
+                <span class="font-serif italic text-sm sm:text-lg text-gray-500">Engineering & Analytics</span>
+                <div class="h-px w-8 sm:w-16 bg-gray-300"></div>
             </div>
         </div>
+
+        <!-- Navigation -->
+        <nav class="border-t border-b border-gray-200 py-3 hidden md:block sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+            <ul class="flex justify-center items-center gap-8 lg:gap-12 text-xs font-[Plus Jakarta Sans] font-bold uppercase tracking-widest text-gray-700">
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Software</li>
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Data Science</li>
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Systems</li>
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Design</li>
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Case Studies</li>
+                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Opinions</li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div class="mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold font-poppins mb-4 text-gray-900">
-                Insights & <span class="text-[var(--primary-color)]">Tutorials</span>
-            </h1>
-            <p class="text-lg text-gray-500 max-w-2xl">
-                Thoughts on the topics I'm passionate about.
-            </p>
+    <main class="flex-grow max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        
+        <!-- Search Bar -->
+        <div class="flex justify-end mb-8 border-b border-gray-200 pb-2">
+            <div class="relative group w-full max-w-xs">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Search the archives..." 
+                    class="w-full bg-transparent text-sm py-2 pl-0 pr-8 border-b border-transparent focus:border-black focus:outline-none transition-colors placeholder:text-gray-400 text-right"
+                />
+                <svg class="w-4 h-4 text-gray-400 absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
         </div>
 
-        <div class="md:hidden mb-8">
-            <input type="text" id="mobile-search-input" placeholder="Search articles..." class="w-full pl-4 pr-4 py-3 border border-gray-200 rounded-lg text-sm bg-gray-50">
+        <!-- Loading State -->
+        <div id="loading" class="flex flex-col items-center justify-center py-32">
+            <div class="w-16 h-1 bg-black animate-pulse mb-4"></div>
+            <p class="font-serif italic text-gray-400">Loading today's edition...</p>
         </div>
 
-        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="col-span-full py-20 text-center text-gray-400 animate-pulse">Loading posts...</div>
+        <!-- Main Content Grid -->
+        <div id="main-content" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-t border-black">
+                
+                <!-- Left Column (Main Content) -->
+                <div class="lg:col-span-9 lg:border-r border-gray-200 pr-0 lg:pr-8 pt-6">
+                    
+                    <!-- Hero Section -->
+                    <div id="hero-section" class="mb-12 border-b border-gray-200 pb-12"></div>
+
+                    <!-- Secondary Grid -->
+                    <div id="standard-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-12 mb-12"></div>
+
+                </div>
+
+                <!-- Right Column (Sidebar) -->
+                <div class="lg:col-span-3 lg:pl-8 pt-6">
+                    <div class="sticky top-24">
+                        <h3 class="font-[Plus Jakarta Sans] font-bold text-xs uppercase tracking-widest border-t-2 border-black pt-2 mb-6">
+                            Trending & Recent
+                        </h3>
+                        
+                        <div id="sidebar-posts" class="flex flex-col gap-2"></div>
+
+                        <div class="mt-12 bg-gray-100 p-6 border border-gray-200">
+                            <h4 class="font-serif font-bold text-xl mb-2 text-gray-900">Weekly Newsletter</h4>
+                            <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                                Get the latest insights on system architecture and data engineering delivered to your inbox every Sunday.
+                            </p>
+                            <div class="flex flex-col gap-2">
+                                <input 
+                                    type="email" 
+                                    placeholder="Your email address" 
+                                    class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                                />
+                                <button class="w-full bg-black text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-[#D4AF37] transition-colors">
+                                    Subscribe
+                                </button>
+                            </div>
+                            <p class="text-[10px] text-gray-400 mt-3 text-center">No spam, just quality content.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </main>
 
-    <footer class="border-t border-gray-100 py-8 bg-gray-50 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400 text-sm">© 2025 John Everett. All rights reserved.</p>
+    <footer class="border-t border-gray-200 bg-white mt-20 pb-12 pt-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="font-masthead text-3xl mb-6">The John Everett</div>
+            <nav class="flex flex-wrap justify-center gap-6 mb-8 text-xs font-[Plus Jakarta Sans] font-bold uppercase tracking-widest text-gray-500">
+                <a href="/" class="hover:text-black">Home</a>
+                <a href="/admin" class="hover:text-black">Admin</a>
+                <a href="https://johnreverett.com" class="hover:text-black">Portfolio</a>
+                <a href="https://johnreverett.com/#contact" class="hover:text-black">Contact</a>
+            </nav>
+            <p class="text-gray-400 text-xs font-serif italic">
+                © <span id="footer-year"></span> John Everett. All rights reserved. 
+                <br class="sm:hidden"/> 
+                Built with HTML, Tailwind & Typography.
+            </p>
         </div>
     </footer>
 
     <script>
-        // Use a relative path so it works on both localhost and prod
+        // Set dates
+        const date = new Date();
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = date.toLocaleDateString('en-US', dateOptions);
+        document.getElementById('footer-year').textContent = date.getFullYear();
+
         const DATA_URL = 'posts.json';
+        let allPosts = [];
 
         async function init() {
             try {
                 const response = await fetch(DATA_URL);
                 if (!response.ok) throw new Error("Could not fetch posts");
-                const allPosts = await response.json();
+                allPosts = await response.json();
                 
                 // Sort by date (newest first)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                renderPosts(allPosts);
+                renderLayout(allPosts);
 
                 // Search Logic
-                const handleSearch = (e) => {
-                    const term = e.target.value.toLowerCase();
-                    const filtered = allPosts.filter(post => 
-                        post.title.toLowerCase().includes(term) || 
-                        post.tags.some(tag => tag.toLowerCase().includes(term))
-                    );
-                    renderPosts(filtered);
-                };
-
                 document.getElementById('search-input').addEventListener('input', handleSearch);
-                document.getElementById('mobile-search-input').addEventListener('input', handleSearch);
 
             } catch (err) {
-                document.getElementById('posts-grid').innerHTML = 
-                    `<div class="col-span-full text-center text-red-400">Unable to load posts. Ensure posts.json exists.</div>`;
+                document.getElementById('loading').innerHTML = 
+                    `<p class="text-center text-red-600">Unable to load articles. Please ensure posts.json exists.</p>`;
             }
         }
 
-        function renderPosts(posts) {
-            const grid = document.getElementById('posts-grid');
-            if (posts.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center text-gray-400 py-12">No articles found.</div>`;
-                return;
-            }
-
-            grid.innerHTML = posts.map(post => `
-                <a href="post.html?id=${post.slug}" class="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col h-full">
-                    <div class="h-48 overflow-hidden relative">
-                        <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 left-3 flex gap-2">
-                             ${post.tags.map(t => `<span class="bg-white/90 backdrop-blur text-[var(--primary-color)] text-xs font-bold px-2 py-1 rounded-md shadow-sm uppercase tracking-wide">${t}</span>`).join('')}
-                        </div>
+        function handleSearch(e) {
+            const term = e.target.value.toLowerCase();
+            const filtered = allPosts.filter(post => 
+                post.title.toLowerCase().includes(term) || 
+                post.description.toLowerCase().includes(term) ||
+                post.tags.some(tag => tag.toLowerCase().includes(term))
+            );
+            
+            if (filtered.length === 0) {
+                document.getElementById('main-content').innerHTML = `
+                    <div class="text-center py-20">
+                        <h2 class="text-2xl font-serif">No articles found matching "${term}"</h2>
+                        <p class="text-gray-500 mt-2">Try searching for different keywords.</p>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex items-center text-xs text-gray-400 mb-3 font-medium">
-                            <span>${new Date(post.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
-                            <span class="mx-2">•</span>
-                            <span>${post.readTime || '5 min read'}</span>
+                `;
+            } else {
+                renderLayout(filtered);
+            }
+        }
+
+        function renderLayout(posts) {
+            if (posts.length === 0) return;
+
+            // Hide loading, show content
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+
+            // Layout Logic
+            const heroPost = posts[0];
+            const sidePosts = posts.slice(1, 5); // Next 4 for sidebar
+            const standardPosts = posts.slice(5); // Rest for grid
+
+            // Render Hero
+            renderHero(heroPost);
+
+            // Render Sidebar Posts
+            renderSidebar(sidePosts);
+
+            // Render Standard Grid
+            renderStandardGrid(standardPosts);
+        }
+
+        function renderHero(post) {
+            if (!post) return;
+            
+            const heroHTML = `
+                <article class="group cursor-pointer flex flex-col gap-4">
+                    <div class="overflow-hidden border border-gray-200">
+                        <img 
+                            src="${post.thumbnail}" 
+                            alt="${post.title}" 
+                            class="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[10%] group-hover:grayscale-0"
+                        />
+                    </div>
+                    <div class="flex flex-col gap-3 mt-2">
+                        <div class="flex items-center gap-2 text-xs font-bold font-[Plus Jakarta Sans] tracking-widest uppercase text-[#D4AF37]">
+                            ${post.tags[0] || 'Article'}
                         </div>
-                        <h2 class="text-xl font-bold font-poppins text-gray-900 mb-3 group-hover:text-[var(--primary-color)] transition-colors leading-tight">
-                            ${post.title}
-                        </h2>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4 flex-grow leading-relaxed">
+                        <a href="post.html?id=${post.slug}">
+                            <h2 class="text-3xl md:text-5xl font-serif font-bold leading-tight text-gray-900 group-hover:text-[#666666] transition-colors">
+                                ${post.title}
+                            </h2>
+                        </a>
+                        <p class="text-lg text-gray-600 font-[Plus Jakarta Sans] leading-relaxed font-light line-clamp-3">
                             ${post.description}
                         </p>
-                        <div class="flex items-center text-[var(--primary-color)] font-bold text-sm mt-auto">
-                            Read Article <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        <div class="flex items-center text-xs text-gray-400 mt-2 font-[Plus Jakarta Sans] uppercase tracking-wide">
+                            <span>By <span class="text-gray-900 font-bold">John Everett</span></span>
+                            <span class="mx-2">•</span>
+                            <span>${formatDate(post.date)}</span>
                         </div>
                     </div>
-                </a>
+                </article>
+            `;
+            
+            document.getElementById('hero-section').innerHTML = heroHTML;
+        }
+
+        function renderSidebar(posts) {
+            const sidebarHTML = posts.map((post, index) => {
+                // Alternate between sidebar and opinion styles
+                if (index % 2 === 0) {
+                    // Sidebar style
+                    return `
+                        <article class="group cursor-pointer flex flex-row gap-4 py-4 border-b border-gray-100 last:border-0">
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="text-[10px] font-bold font-[Plus Jakarta Sans] tracking-widest uppercase text-[#D4AF37] mb-1">
+                                        ${post.tags[0] || 'Article'}
+                                    </div>
+                                    <a href="post.html?id=${post.slug}">
+                                        <h4 class="text-md font-serif font-semibold leading-tight text-gray-800 group-hover:text-gray-500 transition-colors">
+                                            ${post.title}
+                                        </h4>
+                                    </a>
+                                </div>
+                                <span class="text-[10px] text-gray-400 mt-2 uppercase">${formatDate(post.date)}</span>
+                            </div>
+                            <div class="w-20 h-20 flex-shrink-0 overflow-hidden border border-gray-100">
+                                <img 
+                                    src="${post.thumbnail}" 
+                                    alt="${post.title}" 
+                                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                />
+                            </div>
+                        </article>
+                    `;
+                } else {
+                    // Opinion style
+                    return `
+                        <article class="group cursor-pointer py-4 border-b border-gray-200 last:border-0">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="h-px w-4 bg-[#D4AF37]"></div>
+                                <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400">${post.tags[0] || 'Article'}</span>
+                            </div>
+                            <a href="post.html?id=${post.slug}">
+                                <h3 class="text-lg font-serif font-medium italic text-gray-900 group-hover:text-[#D4AF37] transition-colors mb-2">
+                                    ${post.title}
+                                </h3>
+                            </a>
+                            <p class="text-xs text-gray-500 font-[Plus Jakarta Sans] line-clamp-2">${post.description}</p>
+                        </article>
+                    `;
+                }
+            }).join('');
+
+            document.getElementById('sidebar-posts').innerHTML = sidebarHTML;
+        }
+
+        function renderStandardGrid(posts) {
+            const gridHTML = posts.map(post => `
+                <article class="group cursor-pointer flex flex-col gap-3 py-4">
+                    <div class="overflow-hidden border border-gray-100 mb-2">
+                        <img 
+                            src="${post.thumbnail}" 
+                            alt="${post.title}" 
+                            class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-105 grayscale-[20%] group-hover:grayscale-0"
+                        />
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] font-bold font-[Plus Jakarta Sans] tracking-widest uppercase text-gray-400">
+                        ${post.tags[0] || 'Article'}
+                    </div>
+                    <a href="post.html?id=${post.slug}">
+                        <h3 class="text-xl font-serif font-bold leading-snug text-gray-900 group-hover:text-[#D4AF37] transition-colors">
+                            ${post.title}
+                        </h3>
+                    </a>
+                    <p class="text-sm text-gray-500 font-[Plus Jakarta Sans] leading-relaxed line-clamp-3">
+                        ${post.description}
+                    </p>
+                    <span class="text-xs text-gray-400 font-[Plus Jakarta Sans] mt-1">${post.readTime || '5 min read'}</span>
+                </article>
             `).join('');
+
+            document.getElementById('standard-posts').innerHTML = gridHTML;
+        }
+
+        function formatDate(dateStr) {
+            const options = { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
+            return new Date(dateStr).toLocaleDateString('en-US', options);
         }
 
         init();

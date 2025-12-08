@@ -1,0 +1,126 @@
+/* NYT-style preview for Decap CMS */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --nyt-black: #121212;
+  --nyt-gray: #333;
+  --nyt-light-gray: #717171;
+  --nyt-border: #e5e5e5;
+  --nyt-accent: #326891;
+}
+
+body {
+  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--nyt-black);
+  background-color: #ffffff;
+  line-height: 1.75;
+  font-size: 1.125rem;
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.875rem;
+  margin-top: 2.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+p:first-of-type::first-letter {
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.9;
+  font-weight: 700;
+  margin-right: 0.125rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+
+a {
+  color: var(--nyt-accent);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--nyt-black);
+}
+
+ul, ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+blockquote {
+  border-left: 3px solid var(--nyt-black);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--nyt-gray);
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-family: 'Courier New', monospace;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 1.25rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--nyt-border);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  display: block;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--nyt-border) 20%, var(--nyt-border) 80%, transparent);
+  margin: 3rem 0;
+}

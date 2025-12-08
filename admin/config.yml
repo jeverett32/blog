@@ -1,21 +1,70 @@
 backend:
   name: git-gateway
-  branch: main # Change to 'master' if your repo uses master
+  branch: main
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
+# Display URL for preview
+site_url: https://johneverettblog.netlify.app
+display_url: https://johneverettblog.netlify.app
+
 collections:
   - name: "blog"
-    label: "Blog"
+    label: "Journal Articles"
+    label_singular: "Article"
     folder: "posts"
     create: true
     slug: "{{slug}}"
+    preview_path: "post.html?id={{slug}}"
+    editor:
+      preview: true
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Thumbnail Image", name: "thumbnail", widget: "image"}
-      - {label: "Read Time", name: "readTime", widget: "string", default: "5 min read"}
-      - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "Short Description", name: "description", widget: "text"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {
+          label: "Article Title", 
+          name: "title", 
+          widget: "string",
+          hint: "The main headline for your article"
+        }
+      - {
+          label: "Publish Date", 
+          name: "date", 
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          hint: "When this article should be published"
+        }
+      - {
+          label: "Featured Image", 
+          name: "thumbnail", 
+          widget: "image",
+          hint: "Main image for the article (recommended: 1200x800px)"
+        }
+      - {
+          label: "Read Time", 
+          name: "readTime", 
+          widget: "string", 
+          default: "5 min read",
+          pattern: ['^[0-9]+ min read$', 'Must be in format: "5 min read"'],
+          hint: 'Estimated reading time (e.g., "5 min read")'
+        }
+      - {
+          label: "Tags", 
+          name: "tags", 
+          widget: "list",
+          hint: "Categories for this article (e.g., Tutorial, Opinion, AI)",
+          max: 5
+        }
+      - {
+          label: "Short Description", 
+          name: "description", 
+          widget: "text",
+          hint: "Brief summary shown on the homepage (2-3 sentences)",
+          pattern: ['^.{50,300}$', 'Description should be between 50-300 characters']
+        }
+      - {
+          label: "Article Body", 
+          name: "body", 
+          widget: "markdown",
+          hint: "The full content of your article. First paragraph will have a drop cap."
+        }

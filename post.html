@@ -3,82 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article | John Everett</title>
+    <title>Article | The John Everett</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Chomsky&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/front-matter/2.1.2/front-matter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
     <style>
+        @import url('https://fonts.cdnfonts.com/css/chomsky');
+
         :root {
-            --primary-color: #2563eb; /* Darker blue for legibility on white */
-            --accent-color: #58a6ff;  /* Your portfolio blue */
-            --text-main: #111827;
-            --text-muted: #6b7280;
+            --color-gold: #D4AF37;
+            --color-black: #121212;
+            --color-gray-dark: #333333;
+            --color-gray-medium: #666666;
+            --color-gray-light: #e5e7eb;
         }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #ffffff; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: #FAFAFA;
+            color: var(--color-black);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-masthead {
+            font-family: 'Chomsky', 'Playfair Display', serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .article-body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-black);
+        }
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+        .article-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+        .article-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .article-body ul, .article-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+        .article-body em {
+            font-style: italic;
+        }
+        .article-body strong {
+            font-weight: 600;
+        }
+        .article-body blockquote {
+            border-left: 3px solid var(--color-black);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--color-gray-dark);
+        }
+        .article-body a {
+            color: var(--color-gold);
+            text-decoration: underline;
+        }
+        .article-body a:hover {
+            color: var(--color-black);
+        }
+        .article-body code {
+            background-color: #f5f5f5;
+            padding: 0.125rem 0.25rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        .article-body pre {
+            background-color: #f5f5f5;
+            padding: 1.25rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e5e5;
+        }
+        .article-body pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        .article-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+        .dropcap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.85;
+            font-weight: 700;
+            margin-right: 0.25rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--color-gold);
+        }
     </style>
 </head>
-<body class="bg-white text-gray-800 antialiased flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col bg-[#FAFAFA]">
 
-    <header class="border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header class="flex flex-col w-full border-b-4 border-black mb-8 bg-white">
+        <!-- Top Bar -->
+        <div class="flex justify-between items-center py-1 px-4 sm:px-8 border-b border-gray-200 text-[11px] font-[Plus Jakarta Sans] uppercase tracking-widest text-gray-500">
             <div class="flex items-center gap-4">
-                <a href="https://johnreverett.com" class="text-sm font-bold text-gray-400 hover:text-[var(--primary-color)] transition">
-                    &larr; PORTFOLIO
-                </a>
-                <div class="h-6 w-px bg-gray-200"></div>
-                <a href="/" class="text-2xl font-extrabold font-poppins tracking-tight">
-                    John Everett <span class="text-[var(--primary-color)]">Blog</span>
-                </a>
+                <a href="/" class="hover:text-[#D4AF37] transition-colors">&larr; Back to Home</a>
             </div>
-            
-            <div class="relative w-full max-w-xs hidden md:block">
-                <input type="text" id="search-input" placeholder="Search articles..." 
-                    class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition">
-                <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <div class="flex items-center gap-4">
+                <a href="https://johnreverett.com" class="hover:text-[#D4AF37] transition-colors">Portfolio</a>
+                <a href="https://github.com/jeverett32" class="hover:text-[#D4AF37] transition-colors">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Masthead -->
+        <div class="py-6 sm:py-8 flex flex-col items-center justify-center">
+            <a href="/" class="text-3xl sm:text-5xl md:text-6xl font-masthead font-black tracking-tight text-black text-center px-4 leading-none">
+                The John Everett
+            </a>
+            <div class="mt-2 flex items-center gap-3">
+                <div class="h-px w-8 sm:w-12 bg-gray-300"></div>
+                <span class="font-serif italic text-sm sm:text-base text-gray-500">Engineering & Analytics</span>
+                <div class="h-px w-8 sm:w-12 bg-gray-300"></div>
             </div>
         </div>
     </header>
 
-    <article class="max-w-3xl mx-auto px-4 pb-20 pt-12">
-        <div id="loading" class="text-center py-20 text-gray-400">Loading Article...</div>
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         
-        <div id="content" class="hidden">
-            <header class="mb-10">
-                <div class="flex gap-2 mb-4" id="post-tags"></div>
-                <h1 id="post-title" class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight"></h1>
-                <div class="text-gray-500 text-sm" id="post-date"></div>
+        <div id="loading" class="flex flex-col items-center justify-center py-32">
+            <div class="w-16 h-1 bg-black animate-pulse mb-4"></div>
+            <p class="font-serif italic text-gray-400">Loading article...</p>
+        </div>
+
+        <article id="content" class="hidden bg-white p-8 md:p-12 my-8 border border-gray-200">
+            <!-- Article Header -->
+            <header class="mb-10 pb-8 border-b border-gray-200">
+                <div class="flex gap-2 mb-4">
+                    <span id="post-tag" class="text-xs font-bold font-[Plus Jakarta Sans] tracking-widest uppercase text-[#D4AF37]"></span>
+                </div>
+                <h1 id="post-title" class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 text-gray-900"></h1>
+                <div class="flex items-center text-xs text-gray-400 font-[Plus Jakarta Sans] uppercase tracking-wide">
+                    <span>By <span class="text-gray-900 font-bold">John Everett</span></span>
+                    <span class="mx-2">•</span>
+                    <span id="post-date"></span>
+                    <span class="mx-2">•</span>
+                    <span id="post-read-time"></span>
+                </div>
             </header>
 
-            <img id="post-image" class="w-full h-64 md:h-96 object-cover rounded-2xl mb-10 shadow-lg hidden" alt="">
-
-            <div id="markdown-body" class="prose prose-lg prose-blue max-w-none">
+            <!-- Feature Image -->
+            <figure id="post-image-container" class="mb-12 hidden">
+                <div class="border border-gray-200 overflow-hidden">
+                    <img id="post-image" class="w-full aspect-[16/9] object-cover grayscale-[10%]" alt="">
                 </div>
-        </div>
-    </article>
+                <figcaption class="text-xs text-gray-500 mt-3 italic text-center" id="post-caption"></figcaption>
+            </figure>
 
-    <section class="max-w-5xl mx-auto px-4 pb-20">
-        <h2 class="text-3xl font-extrabold mb-6 text-center">Related Articles</h2>
-        <div id="related-articles" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Related articles will be injected here by JavaScript -->
-        </div>
-    </section>
+            <!-- Article Body -->
+            <div id="markdown-body" class="article-body max-w-3xl mx-auto"></div>
 
-    <footer class="border-t border-gray-100 py-8 bg-gray-50 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400 text-sm">© 2025 John Everett. All rights reserved.</p>
+            <!-- Share & Tags -->
+            <div class="mt-16 pt-8 border-t border-gray-200 max-w-3xl mx-auto">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-xs font-bold font-[Plus Jakarta Sans] uppercase tracking-widest text-gray-500">Filed Under:</span>
+                    <div id="post-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Related Articles -->
+        <section class="my-16">
+            <h2 class="font-[Plus Jakarta Sans] font-bold text-xs uppercase tracking-widest border-t-2 border-black pt-2 mb-8">
+                More to Read
+            </h2>
+            <div id="related-articles" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white mt-20 pb-12 pt-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            <div class="font-masthead text-3xl mb-6">The John Everett</div>
+            <nav class="flex flex-wrap justify-center gap-6 mb-8 text-xs font-[Plus Jakarta Sans] font-bold uppercase tracking-widest text-gray-500">
+                <a href="/" class="hover:text-black">Home</a>
+                <a href="/admin" class="hover:text-black">Admin</a>
+                <a href="https://johnreverett.com" class="hover:text-black">Portfolio</a>
+                <a href="https://johnreverett.com/#contact" class="hover:text-black">Contact</a>
+            </nav>
+            <p class="text-gray-400 text-xs font-serif italic">
+                © <span id="footer-year"></span> John Everett. All rights reserved. 
+            </p>
         </div>
     </footer>
 
     <script>
+        // Set footer year
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('id');
 
@@ -91,12 +235,14 @@
                 if (!res.ok) throw new Error("Post not found");
                 const text = await res.text();
 
-                // Use a simple regex to separate Frontmatter (YAML) from Body
+                // Parse frontmatter and body
                 const parts = text.split('---');
-                const body = parts.slice(2).join('---');
+                const body = parts.slice(2).join('---').trim();
 
-                // Render Markdown
-                document.getElementById('markdown-body').innerHTML = marked.parse(body);
+                // Render Markdown with dropcap on first paragraph
+                let htmlContent = marked.parse(body);
+                htmlContent = htmlContent.replace('<p>', '<p class="dropcap">');
+                document.getElementById('markdown-body').innerHTML = htmlContent;
                 
                 // Fetch all post metadata
                 const jsonRes = await fetch('/posts.json');
@@ -105,34 +251,38 @@
                 const currentPost = allPosts.find(p => p.slug === slug);
 
                 if (currentPost) {
+                    document.title = `${currentPost.title} | The John Everett`;
                     document.getElementById('post-title').textContent = currentPost.title;
-                    document.getElementById('post-date').textContent = new Date(currentPost.date).toLocaleDateString('en-US', { timeZone: 'UTC' });
                     
+                    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
+                    document.getElementById('post-date').textContent = new Date(currentPost.date).toLocaleDateString('en-US', dateOptions);
+                    document.getElementById('post-read-time').textContent = currentPost.readTime || '5 min read';
+                    
+                    // Tags
+                    document.getElementById('post-tag').textContent = currentPost.tags[0] || 'Article';
+                    document.getElementById('post-tags').innerHTML = currentPost.tags.map(t => 
+                        `<span class="text-xs px-3 py-1 bg-gray-100 font-[Plus Jakarta Sans] font-semibold uppercase tracking-wider hover:bg-[#D4AF37] hover:text-white transition-colors cursor-pointer">${t}</span>`
+                    ).join('');
+                    
+                    // Featured image
                     if (currentPost.thumbnail) {
+                        const postImageContainer = document.getElementById('post-image-container');
                         const postImage = document.getElementById('post-image');
                         postImage.src = currentPost.thumbnail;
                         postImage.alt = currentPost.title;
-                        postImage.classList.remove('hidden');
+                        postImageContainer.classList.remove('hidden');
+                        document.getElementById('post-caption').textContent = currentPost.title;
                     }
-
-                    document.getElementById('post-tags').innerHTML = currentPost.tags.map(t => 
-                        `<span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-bold uppercase">${t}</span>`
-                    ).join('');
                     
-                    // --- Related Articles Logic ---
-                    
-                    // 1. Sort all posts by date (newest first)
+                    // Related Articles Logic
                     const sortedPosts = allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                    // 2. Find related articles by tag
                     let relatedArticles = sortedPosts.filter(p => {
                         return p.slug !== currentPost.slug && p.tags.some(tag => currentPost.tags.includes(tag));
                     });
 
-                    // 3. If not enough related articles, fill with most recent
                     if (relatedArticles.length < 3) {
                         const recentPosts = sortedPosts.filter(p => {
-                            // Exclude current post and already included related articles
                             return p.slug !== currentPost.slug && !relatedArticles.find(rp => rp.slug === p.slug);
                         });
                         
@@ -140,42 +290,50 @@
                         relatedArticles.push(...recentPosts.slice(0, needed));
                     }
 
-                    // 4. Take the first 3
                     relatedArticles = relatedArticles.slice(0, 3);
                     
-                    // 5. Render related articles
                     const relatedContainer = document.getElementById('related-articles');
                     if (relatedArticles.length > 0) {
                         relatedContainer.innerHTML = relatedArticles.map(post => `
-                            <a href="/post.html?id=${post.slug}" class="block group">
-                                <img src="${post.thumbnail}" alt="${post.title}" class="w-full h-32 object-cover rounded-lg mb-2 group-hover:opacity-75 transition-opacity">
-                                <h3 class="font-bold text-lg mb-1 group-hover:text-blue-600 transition-colors">${post.title}</h3>
-                                <div class="text-gray-500 text-sm">
-                                    <span>${new Date(post.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</span>
-                                    <span class="mx-1">•</span>
-                                    <span>${post.readTime || '5 min read'}</span>
+                            <article class="group cursor-pointer flex flex-col gap-3 py-4">
+                                <div class="overflow-hidden border border-gray-100 mb-2">
+                                    <img 
+                                        src="${post.thumbnail}" 
+                                        alt="${post.title}" 
+                                        class="w-full aspect-[3/2] object-cover transition-transform duration-500 group-hover:scale-105 grayscale-[20%] group-hover:grayscale-0"
+                                    />
                                 </div>
-                            </a>
+                                <div class="flex items-center gap-2 text-[10px] font-bold font-[Plus Jakarta Sans] tracking-widest uppercase text-gray-400">
+                                    ${post.tags[0] || 'Article'}
+                                </div>
+                                <a href="/post.html?id=${post.slug}">
+                                    <h3 class="text-xl font-serif font-bold leading-snug text-gray-900 group-hover:text-[#D4AF37] transition-colors">
+                                        ${post.title}
+                                    </h3>
+                                </a>
+                                <span class="text-xs text-gray-400 font-[Plus Jakarta Sans] mt-1">${post.readTime || '5 min read'}</span>
+                            </article>
                         `).join('');
-                    } else {
-                        relatedContainer.innerHTML = '<p class="text-gray-500">No other articles to display.</p>';
-                         document.querySelector('h2').style.display = 'none';
                     }
 
                 } else {
                      throw new Error("Post metadata not found");
                 }
 
-
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('content').classList.remove('hidden');
                 
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Highlight code blocks
                 Prism.highlightAll();
 
             } catch (err) {
-                document.getElementById('loading').textContent = err.message || "Article not found.";
+                document.getElementById('loading').innerHTML = `<p class="text-center text-red-600">${err.message || "Article not found."}</p>`;
             }
         }
+
         loadPost();
     </script>
 </body>
