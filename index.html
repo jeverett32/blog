@@ -50,7 +50,7 @@
         <!-- Masthead -->
         <div class="py-6 sm:py-10 flex flex-col items-center justify-center relative">
             <div class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 md:hidden">
-                <button class="p-2">
+                <button id="mobile-menu-btn" class="p-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
@@ -68,12 +68,26 @@
         <!-- Navigation -->
         <nav class="border-t border-b border-gray-200 py-3 hidden md:block sticky top-0 bg-white/95 backdrop-blur-sm z-50">
             <ul class="flex justify-center items-center gap-8 lg:gap-12 text-xs font-[Plus Jakarta Sans] font-bold uppercase tracking-widest text-gray-700">
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Software</li>
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Data Science</li>
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Systems</li>
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Design</li>
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Case Studies</li>
-                <li class="cursor-pointer hover:text-[#D4AF37] transition-colors">Opinions</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="all">All</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Software">Software</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Data Science">Data Science</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Systems">Systems</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Updates">Updates</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Tutorials">Tutorials</li>
+                <li class="nav-filter cursor-pointer hover:text-[#D4AF37] transition-colors" data-category="Opinions">Opinions</li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobile-menu" class="md:hidden hidden border-t border-gray-200 bg-white">
+            <ul class="flex flex-col text-xs font-[Plus Jakarta Sans] font-bold uppercase tracking-widest text-gray-700">
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="all">All</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Software">Software</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Data Science">Data Science</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Systems">Systems</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Updates">Updates</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Tutorials">Tutorials</li>
+                <li class="nav-filter-mobile cursor-pointer hover:bg-gray-50 transition-colors py-4 px-6 border-b border-gray-100" data-category="Opinions">Opinions</li>
             </ul>
         </nav>
     </header>
@@ -128,17 +142,24 @@
                             <p class="text-sm text-gray-600 mb-4 leading-relaxed">
                                 Get the latest insights on system architecture and data engineering delivered to your inbox every Sunday.
                             </p>
-                            <div class="flex flex-col gap-2">
+                            <form id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="flex flex-col gap-2">
+                                <input type="hidden" name="form-name" value="newsletter" />
+                                <p class="hidden">
+                                    <label>Don't fill this out: <input name="bot-field" /></label>
+                                </p>
                                 <input 
+                                    id="newsletter-email"
+                                    name="email"
                                     type="email" 
                                     placeholder="Your email address" 
+                                    required
                                     class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
                                 />
-                                <button class="w-full bg-black text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-[#D4AF37] transition-colors">
+                                <button type="submit" id="newsletter-btn" class="w-full bg-black text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-[#D4AF37] transition-colors">
                                     Subscribe
                                 </button>
-                            </div>
-                            <p class="text-[10px] text-gray-400 mt-3 text-center">No spam, just quality content.</p>
+                            </form>
+                            <p id="newsletter-message" class="text-[10px] text-gray-400 mt-3 text-center">No spam, just quality content.</p>
                         </div>
                     </div>
                 </div>
@@ -159,8 +180,7 @@
             </nav>
             <p class="text-gray-400 text-xs font-serif italic">
                 © <span id="footer-year"></span> John Everett. All rights reserved. 
-                <br class="sm:hidden"/> 
-                Built with HTML, Tailwind & Typography.
+                <br class="sm:hidden"/>
             </p>
         </div>
     </footer>
@@ -174,6 +194,7 @@
 
         const DATA_URL = 'posts.json';
         let allPosts = [];
+        let currentFilter = 'all';
 
         async function init() {
             try {
@@ -184,10 +205,34 @@
                 // Sort by date (newest first)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                renderLayout(allPosts);
+                // Check URL for category filter
+                const urlParams = new URLSearchParams(window.location.search);
+                const category = urlParams.get('category');
+                if (category) {
+                    currentFilter = category;
+                }
+
+                renderLayout(getFilteredPosts());
 
                 // Search Logic
                 document.getElementById('search-input').addEventListener('input', handleSearch);
+
+                // Category Filter Logic
+                document.querySelectorAll('.nav-filter').forEach(item => {
+                    item.addEventListener('click', handleCategoryFilter);
+                });
+                document.querySelectorAll('.nav-filter-mobile').forEach(item => {
+                    item.addEventListener('click', handleCategoryFilter);
+                });
+
+                // Mobile Menu Toggle
+                document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+                // Newsletter Form
+                document.getElementById('newsletter-form').addEventListener('submit', handleNewsletterSubmit);
+
+                // Update active filter styling
+                updateActiveFilter();
 
             } catch (err) {
                 document.getElementById('loading').innerHTML = 
@@ -195,17 +240,133 @@
             }
         }
 
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function handleCategoryFilter(e) {
+            const category = e.target.dataset.category;
+            currentFilter = category;
+            
+            // Update URL
+            const url = new URL(window.location);
+            if (category === 'all') {
+                url.searchParams.delete('category');
+            } else {
+                url.searchParams.set('category', category);
+            }
+            window.history.pushState({}, '', url);
+
+            // Clear search
+            document.getElementById('search-input').value = '';
+
+            // Render filtered posts
+            renderLayout(getFilteredPosts());
+
+            // Update active state
+            updateActiveFilter();
+
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function getFilteredPosts() {
+            if (currentFilter === 'all') {
+                return allPosts;
+            }
+            return allPosts.filter(post => 
+                post.tags.some(tag => tag.toLowerCase() === currentFilter.toLowerCase())
+            );
+        }
+
+        function updateActiveFilter() {
+            // Remove active class from all
+            document.querySelectorAll('.nav-filter, .nav-filter-mobile').forEach(item => {
+                item.classList.remove('text-[#D4AF37]');
+            });
+
+            // Add active class to current
+            document.querySelectorAll(`.nav-filter[data-category="${currentFilter}"], .nav-filter-mobile[data-category="${currentFilter}"]`).forEach(item => {
+                item.classList.add('text-[#D4AF37]');
+            });
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('newsletter-form');
+            const email = document.getElementById('newsletter-email').value;
+            const btn = document.getElementById('newsletter-btn');
+            const message = document.getElementById('newsletter-message');
+
+            // Basic validation
+            if (!email || !email.includes('@')) {
+                message.textContent = 'Please enter a valid email address.';
+                message.classList.remove('text-gray-400', 'text-green-600');
+                message.classList.add('text-red-600');
+                return;
+            }
+
+            // Show loading state
+            btn.textContent = 'Subscribing...';
+            btn.disabled = true;
+
+            // Submit to Netlify Forms
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                message.textContent = `Thanks for subscribing! Check your inbox at ${email}`;
+                message.classList.remove('text-gray-400', 'text-red-600');
+                message.classList.add('text-green-600');
+                btn.textContent = 'Subscribed ✓';
+                document.getElementById('newsletter-email').value = '';
+                
+                // Reset after 5 seconds
+                setTimeout(() => {
+                    btn.textContent = 'Subscribe';
+                    btn.disabled = false;
+                    message.textContent = 'No spam, just quality content.';
+                    message.classList.remove('text-green-600', 'text-red-600');
+                    message.classList.add('text-gray-400');
+                }, 5000);
+            })
+            .catch((error) => {
+                message.textContent = 'Oops! Something went wrong. Please try again.';
+                message.classList.remove('text-gray-400', 'text-green-600');
+                message.classList.add('text-red-600');
+                btn.textContent = 'Subscribe';
+                btn.disabled = false;
+            });
+        }
+
         function handleSearch(e) {
             const term = e.target.value.toLowerCase();
-            const filtered = allPosts.filter(post => 
+            
+            if (!term) {
+                // If search is cleared, show filtered posts based on current category
+                renderLayout(getFilteredPosts());
+                return;
+            }
+
+            // Search within current filter
+            const postsToSearch = getFilteredPosts();
+            const filtered = postsToSearch.filter(post => 
                 post.title.toLowerCase().includes(term) || 
                 post.description.toLowerCase().includes(term) ||
                 post.tags.some(tag => tag.toLowerCase().includes(term))
             );
             
             if (filtered.length === 0) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
                 document.getElementById('main-content').innerHTML = `
-                    <div class="text-center py-20">
+                    <div class="text-center py-20 border-t border-black">
                         <h2 class="text-2xl font-serif">No articles found matching "${term}"</h2>
                         <p class="text-gray-500 mt-2">Try searching for different keywords.</p>
                     </div>

@@ -3,8 +3,8 @@
     "slug": "how-to-install-use-the-gemini-cli-plus-claude-copilot-codex",
     "title": "How to Install & Use the Gemini CLI (Plus Claude, Copilot, & Codex)",
     "date": "2025-11-28",
-    "thumbnail": "/assets/uploads/geminicli.webp",
-    "tags": ["Tutorial", "AI", "CLI"],
+    "thumbnail": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+    "tags": ["Tutorials", "Software"],
     "description": "This step-by-step guide walks you through installing the Gemini CLI to develop code directly from your terminal, with a quick setup comparison for Claude Code, GitHub Copilot, and OpenAI Codex.",
     "readTime": "5 min read"
   },
@@ -12,8 +12,8 @@
     "slug": "why-you-need-to-move-your-workflow-to-the-cli",
     "title": "Why You Need to Move Your Workflow to the CLI",
     "date": "2025-11-28",
-    "thumbnail": "/assets/uploads/geminicli.png",
-    "tags": ["Opinion", "AI", "CLI"],
+    "thumbnail": "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=800&h=600&fit=crop",
+    "tags": ["Opinions", "Software"],
     "description": "My experience using AI agents with the command line interface.",
     "readTime": "3 min read"
   },
@@ -21,8 +21,8 @@
     "slug": "welcome-to-my-blog",
     "title": "Welcome to My Blog",
     "date": "2025-11-27",
-    "thumbnail": "/assets/uploads/laptop.jpeg",
-    "tags": ["Update"],
+    "thumbnail": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    "tags": ["Updates"],
     "description": "A little introduction to myself and why I chose to write this blog.",
     "readTime": "3 min read"
   },
@@ -30,8 +30,8 @@
     "slug": "how-i-built-this-static-blog-with-netlify-decap-cms",
     "title": "How I Built This Static Blog with Netlify & Decap CMS",
     "date": "2025-11-27",
-    "thumbnail": "/assets/uploads/netlify.jpg",
-    "tags": ["Web Development", "Netlify", "Tutorial"],
+    "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+    "tags": ["Tutorials", "Software"],
     "description": "A look under the hood at how I built this blog using plain HTML, Tailwind CSS, and Netlify's free tier without a traditional backend.",
     "readTime": "2 min read"
 }

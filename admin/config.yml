@@ -37,8 +37,22 @@ collections:
       - {
           label: "Featured Image", 
           name: "thumbnail", 
-          widget: "image",
-          hint: "Main image for the article (recommended: 1200x800px)"
+          widget: "select",
+          hint: "Choose a stock image or paste custom Unsplash URL",
+          options: [
+            { label: "📝 Coding/Programming", value: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop" },
+            { label: "💻 Laptop/Workspace", value: "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=800&h=600&fit=crop" },
+            { label: "🌄 Nature/Mountain", value: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" },
+            { label: "🌊 Ocean/Beach", value: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&h=600&fit=crop" },
+            { label: "🌲 Forest/Trees", value: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop" },
+            { label: "🌆 City/Urban", value: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop" },
+            { label: "🔧 Technology/Tools", value: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop" },
+            { label: "📊 Data/Analytics", value: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" },
+            { label: "🎨 Design/Creative", value: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop" },
+            { label: "🌌 Abstract/Patterns", value: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&h=600&fit=crop" },
+            { label: "☁️ Cloud/Sky", value: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=600&fit=crop" },
+            { label: "🔐 Security/Lock", value: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=600&fit=crop" }
+          ]
         }
       - {
           label: "Read Time", 
