@@ -1,4 +1,13 @@
 [
+  {
+    "slug": "i-love-my-major",
+    "title": "I LOVE MY MAJOR",
+    "date": "2025-12-18",
+    "thumbnail": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+    "tags": ["Opinions", "Updates"],
+    "description": "Here's a look at my semester. What went well? What was sucky? Read more to find out.",
+    "readTime": "7 min read"
+  },
     {
     "slug": "how-to-install-use-the-gemini-cli-plus-claude-copilot-codex",
     "title": "How to Install & Use the Gemini CLI (Plus Claude, Copilot, & Codex)",
